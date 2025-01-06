@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Management | Expense Tracker</title>
+  <link rel="stylesheet" href="./style/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .management-container {
+      margin: 30px;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+    }
+    #logout-btn {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container management-container">
+    <div class="d-flex justify-content-between align-items-start">
+        <h3>Expense Management</h3>
+        <button id="logout-btn" class="btn btn-danger mb-3 ml-auto">Logout</button>
+      </div>
+    <!-- Add New Expense Form -->
+    <div class="form-container mb-4">
+      <h5>Add New Expense</h5>
+      <form id="add-expense-form">
+        <div class="mb-3">
+          <label for="expense-name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="expense-name" required>
+        </div>
+        <div class="mb-3">
+          <label for="expense-description" class="form-label">Description</label>
+          <input type="text" class="form-control" id="expense-description" required>
+        </div>
+        <div class="mb-3">
+          <label for="expense-amount" class="form-label">Amount</label>
+          <input type="number" class="form-control" id="expense-amount" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Add Expense</button>
+      </form>
+    </div>
+
+    <!-- Expense List -->
+    <div>
+      <h5>Expenses</h5>
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="expenses-table">
+          <!-- Expenses will be populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      window.location.href = 'login.html';
+    }
+
+    // Load all expenses
+    const loadExpenses = async () => {
+      const response = await fetch('http://localhost:3333/admin/expenses', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const expenses = await response.json();
+      const tableBody = document.getElementById('expenses-table');
+      tableBody.innerHTML = '';
+
+      expenses.forEach((expense) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${expense.id}</td>
+          <td>${expense.name}</td>
+          <td>${expense.description}</td>
+          <td>${expense.amount}</td>
+          <td>
+            <button class="btn btn-warning btn-sm edit-expense-btn" data-id="${expense.id}">Edit</button>
+            <button class="btn btn-danger btn-sm delete-expense-btn" data-id="${expense.id}">Delete</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      document.querySelectorAll('.edit-expense-btn').forEach((btn) =>
+        btn.addEventListener('click', handleEditExpense)
+      );
+      document.querySelectorAll('.delete-expense-btn').forEach((btn) =>
+        btn.addEventListener('click', handleDeleteExpense)
+      );
+    };
+
+    // Add a new expense
+    document.getElementById('add-expense-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('expense-name').value;
+      const description = document.getElementById('expense-description').value;
+      const amount = document.getElementById('expense-amount').value;
+      try {
+        await fetch('http://localhost:3000/admin/expense', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name, description, amount }),
+        });
+        loadExpenses();
+      } catch (err) {
+        alert('Error adding expense');
+      }
+    });
+
+    // Edit an expense
+    const handleEditExpense = async (e) => {
+      const expenseId = e.target.getAttribute('data-id');
+      const name = prompt('Enter new name:');
+      const description = prompt('Enter new description:');
+      const amount = prompt('Enter new amount:');
+      try {
+        await fetch(`http://localhost:3000/admin/expense/${expenseId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name, description, amount }),
+        });
+        loadExpenses();
+      } catch (err) {
+        alert('Error updating expense');
+      }
+    };
+
+    // Delete an expense
+    const handleDeleteExpense = async (e) => {
+      const expenseId = e.target.getAttribute('data-id');
+      try {
+        await fetch(`http://localhost:3000/admin/expense/${expenseId}`, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        loadExpenses();
+      } catch (err) {
+        alert('Error deleting expense');
+      }
+    };
+
+    // Logout functionality
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem('access_token');
+      window.location.href = 'login.html';
+    });
+
+    // Load expenses on page load
+    loadExpenses();
+  </script>
+</body>
+</html>

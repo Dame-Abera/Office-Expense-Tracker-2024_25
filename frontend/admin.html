@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Expense Tracker</title>
+  <link rel="stylesheet" href="./style/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .dashboard-container {
+      margin: 30px;
+    }
+    #logout-btn {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container dashboard-container">
+    <div class="d-flex justify-content-between align-items-start">
+        <h3>Admin Dashboard</h3>
+        <button id="logout-btn" class="btn btn-danger mb-3 ml-auto">Logout</button>
+      </div>
+    <!-- Links to User Management and Expense Management -->
+    <div class="mb-4">
+      <h5>Manage Users</h5>
+      <a href="users.html" class="btn btn-primary w-100 mb-3">Go to User Management</a>
+
+      <h5>Manage Expenses</h5>
+      <a href="expenses.html" class="btn btn-primary w-100">Go to Expense Management</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      localStorage.removeItem('access_token');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
