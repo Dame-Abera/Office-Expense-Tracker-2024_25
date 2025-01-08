@@ -28,18 +28,14 @@
     <!-- Links to User Management and Expense Management -->
     <div class="mb-4">
       <h5>Manage Users</h5>
-      <a href="users.html" class="btn btn-primary w-100 mb-3">Go to User Management</a>
+      <a href="./user.html" class="btn btn-primary w-100 mb-3">Go to User Management</a>
 
       <h5>Manage Expenses</h5>
-      <a href="expenses.html" class="btn btn-primary w-100">Go to Expense Management</a>
+      <a href="./expenses.html" class="btn btn-primary w-100">Go to Expense Management</a>
     </div>
   </div>
 
-  <script>
-    document.getElementById('logout-btn').addEventListener('click', () => {
-      localStorage.removeItem('access_token');
-      window.location.href = 'login.html';
-    });
-  </script>
+  <script src="./javascript/admin.js"> </script>
+  <script src="./javascript/bootstrap.bundle.min.js"></script>
 </body>
 </html>

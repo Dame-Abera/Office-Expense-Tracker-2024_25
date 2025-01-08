@@ -27,9 +27,13 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
       console.log(data)
       // Redirect to dashboard or another page
       if (data.role === 'CEO') {
-        window.location.href = '/frontend/admin.html';
+        window.location.href = '/frontend/src/admin.html';
+        console.log("Redirecting to:", window.location.href);
+
       } else if (data.role === 'EMPLOYEE') {
-        window.location.href = '/frontend/employe.html';
+        window.location.href ="/frontend/src/employe.html";
+        console.log("Redirecting to:", window.location.href);
+
       } 
       
     } catch (error) {

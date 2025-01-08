@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management | Expense Tracker</title>
+  <link rel="stylesheet" href="./style/bootstrap.min.css">
+  <style>
+    body {  
+      background-color: #f8f9fa;
+    }
+    .management-container {
+      margin: 30px;
+    }
+    #logout-btn {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container management-container">
+    <div class="d-flex justify-content-between align-items-start">
+        <h3>Users Management</h3>
+        <button id="logout-btn" class="btn btn-danger mb-3 ml-auto">Logout</button>
+      </div>
+    
+    <!-- Add New User Form -->
+    <div class="mb-4">
+      <h5>Add New User</h5>
+      <form id="add-user-form">
+        <div class="mb-3">
+          <label for="user-email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="user-email" required>
+        </div>
+        <div class="mb-3">
+          <label for="user-password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="user-password" required>
+        </div>
+        <div class="mb-3">
+          <label for="user-role" class="form-label">Role</label>
+          <select class="form-control" id="user-role" required>
+            <option value="EMPLOYEE">Employee</option>
+            <option value="CEO">CEO</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add User</button>
+      </form>
+    </div>
+
+    <!-- User List -->
+    <div>
+      <h5>Users</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users-table">
+          <!-- Users will be populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal for Editing User -->
+  <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="edit-email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="edit-email" required>
+          </div>
+          <div class="mb-3">
+            <label for="edit-role" class="form-label">Role</label>
+            <select class="form-control" id="edit-role" required>
+              <option value="EMPLOYEE">Employee</option>
+              <option value="CEO">CEO</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-primary" id="update-user-btn">Update User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./javascript/users.js"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,71 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | Expense Tracker</title>
-  <link rel="stylesheet" href="./style/bootstrap.min.css">
-  <style>
-    body {
-      background-color: #f8f9fa;
-    }
-    .dashboard-container {
-      margin: 30px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container dashboard-container">
-    <h3 class="text-center">Admin Dashboard</h3>
-    <button id="logout-btn" class="btn btn-danger mb-3">Logout</button>
-
-    <!-- User Management Section -->
-    <div class="mb-4">
-      <h5>Users</h5>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="users-table">
-          <!-- Users will be populated dynamically -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Expense Management Section -->
-    <div class="mb-4">
-      <h5>Expenses</h5>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="expenses-table">
-          <!-- Expenses will be populated dynamically -->
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <script>
-    const token = localStorage.getItem('access_token');
+const token = localStorage.getItem('access_token');
     if (!token) {
       window.location.href = 'login.html';
     }
 
     // Load all users
     const loadUsers = async () => {
-      const response = await fetch('http://localhost:3000/admin/users', {
+      const response = await fetch('http://localhost:3333/admin/users', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const users = await response.json();
@@ -92,7 +32,7 @@
 
     // Load all expenses
     const loadExpenses = async () => {
-      const response = await fetch('http://localhost:3000/admin/expenses', {
+      const response = await fetch('http://localhost:3333/admin/expenses', {
         headers: { Authorization: `Bearer ${token}` },
       });
       const expenses = await response.json();
@@ -126,7 +66,7 @@
     const handleDeleteUser = async (e) => {
       const userId = e.target.getAttribute('data-id');
       try {
-        await fetch(`http://localhost:3000/admin/user/${userId}`, {
+        await fetch(`http://localhost:3333/admin/user/${userId}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -140,7 +80,7 @@
     const handleDeleteExpense = async (e) => {
       const expenseId = e.target.getAttribute('data-id');
       try {
-        await fetch(`http://localhost:3000/expense/${expenseId}`, {
+        await fetch(`http://localhost:3333/expense/${expenseId}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -157,7 +97,7 @@
       const description = prompt('Enter new description:');
       const amount = prompt('Enter new amount:');
       try {
-        await fetch(`http://localhost:3000/expense/${expenseId}`, {
+        await fetch(`http://localhost:3333/expense/${expenseId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -180,6 +120,3 @@
     // Load users and expenses on page load
     loadUsers();
     loadExpenses();
-  </script>
-</body>
-</html>
