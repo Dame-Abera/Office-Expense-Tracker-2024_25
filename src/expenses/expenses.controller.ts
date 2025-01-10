@@ -81,11 +81,14 @@ getAllExpenses(@GetUser() user: any) {
   @Delete(':id')
   deleteExpenseById(
     @GetUser('id') userId: number,
+    @GetUser('role') userRole: string,
     @Param('id', ParseIntPipe) expenseId: number,
   ) {
     return this.expenseService.deleteExpenseById(
       userId,
       expenseId,
+       userRole
+
     );
   }
 }

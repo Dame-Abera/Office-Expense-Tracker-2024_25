@@ -1,6 +1,5 @@
-import { CanActivate, ExecutionContext, Injectable, UnauthorizedException, 
-    ForbiddenException,} from '@nestjs/common';
-    import { AuthService } from './auth.service';
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException, ForbiddenException,} from '@nestjs/common';
+import { AuthService } from './auth.service';
       
       @Injectable()
       export class AuthGuard implements CanActivate {
@@ -17,7 +16,7 @@ import { CanActivate, ExecutionContext, Injectable, UnauthorizedException,
             const resp = await this.authService.validateToken(authToken);
             request.decodedData = resp;
             return true;
-          } catch (error) {
+          } catch (error:any) {
             console.log('auth error - ', error.message);
             throw new ForbiddenException(error.message || 'session expired! Please sign In');
           }

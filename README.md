@@ -8,5 +8,3 @@
 | 2  | Eyerusalem T/brhan  | UGR/6149/15 |
 | 3  | Natnael Endale      | UGR/5583/15 |
 | 4  | Bedru Mekiyu        | UGR/7000/15 |
-
-

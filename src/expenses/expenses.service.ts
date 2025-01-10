@@ -73,7 +73,14 @@ console.log(expense)
     });
   }
 
-  async deleteExpenseById(userId: number, expenseId: number) {
+  async deleteExpenseById(userId: number, expenseId: number, userRole: string) {
+    if (userRole === 'CEO') {
+      return this.prisma.expense.delete({
+        where: {
+          id: expenseId,
+        },
+      });
+    }
     const expense = await this.prisma.expense.findFirst({
       where: {
         id: expenseId,

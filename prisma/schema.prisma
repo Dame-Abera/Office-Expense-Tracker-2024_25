@@ -17,10 +17,11 @@ model User {
   lastName  String?
   role      Role     @default(EMPLOYEE)
 
-  expenses Expense[]
+  expenses Expense[] 
 
   @@map("users")
 }
+
 
 model Expense {
   id          Int      @id @default(autoincrement())
@@ -30,7 +31,7 @@ model Expense {
   amount      Float
   description String?
   userId      Int
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("expenses")
 }
