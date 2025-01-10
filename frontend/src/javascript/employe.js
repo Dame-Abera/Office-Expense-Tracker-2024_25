@@ -1,4 +1,5 @@
 const token = localStorage.getItem('access_token');
+console.log('office-expense-tracker');
 
 if (!token) {
   window.location.href = './login.html';
