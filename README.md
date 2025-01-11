@@ -9,7 +9,6 @@
 | 3  | Natnael Endale      | UGR/5583/15 |
 | 4  | Bedru Mekiyu        | UGR/7000/15 |
 
-
 ## Database Technology Justification
 
 For our **office expense tracker web application**, we chose **PostgreSQL** as the database technology, paired with **Prisma ORM**. The decision is based on the following reasons:

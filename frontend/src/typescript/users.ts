@@ -24,7 +24,6 @@ const loadUsers = async (): Promise<void> => {
         <td>${user.role}</td>
         <td>
           <button class="btn btn-warning btn-sm edit-user-btn" data-id="${user.id}">Edit</button>
-          <button class="btn btn-danger btn-sm delete-user-btn" data-id="${user.id}">Delete</button>
         </td>
       `;
       tableBody.appendChild(row);

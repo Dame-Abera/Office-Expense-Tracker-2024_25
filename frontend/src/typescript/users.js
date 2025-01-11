@@ -62,7 +62,7 @@ var loadUsers = function () { return __awaiter(_this, void 0, void 0, function (
                 tableBody_1.innerHTML = '';
                 users.forEach(function (user) {
                     var row = document.createElement('tr');
-                    row.innerHTML = "\n        <td>".concat(user.id, "</td>\n        <td>").concat(user.email, "</td>\n        <td>").concat(user.role, "</td>\n        <td>\n          <button class=\"btn btn-warning btn-sm edit-user-btn\" data-id=\"").concat(user.id, "\">Edit</button>\n          <button class=\"btn btn-danger btn-sm delete-user-btn\" data-id=\"").concat(user.id, "\">Delete</button>\n        </td>\n      ");
+                    row.innerHTML = "\n        <td>".concat(user.id, "</td>\n        <td>").concat(user.email, "</td>\n        <td>").concat(user.role, "</td>\n        <td>\n          <button class=\"btn btn-warning btn-sm edit-user-btn\" data-id=\"").concat(user.id, "\">Edit</button>\n        </td>\n      ");
                     tableBody_1.appendChild(row);
                 });
                 document.querySelectorAll('.edit-user-btn').forEach(function (btn) {
