@@ -18,8 +18,6 @@ For our **office expense tracker web application**, we chose **PostgreSQL** as t
 
 - **ACID Compliance**: PostgreSQL ensures **data integrity and reliability**, which is critical for tracking expenses accurately.
 
-- **Scalability**: As the application grows, PostgreSQL can scale **vertically and horizontally**, providing **long-term flexibility**.
-
 - **Integration with Prisma**: **Prisma ORM** simplifies database management with **type-safe queries, schema migrations,** and **developer-friendly tools**, enhancing productivity.
 
 This combination ensures **efficient** and **maintainable backend** for our application.
