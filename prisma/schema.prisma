@@ -40,3 +40,46 @@ enum Role {
   CEO
   EMPLOYEE
 }
+
+generator client {
+  provider = "prisma-client-js" // Generates the Prisma Client for database operations.
+}
+
+datasource db {
+  provider = "postgresql"       // Connects to a PostgreSQL database.
+  url      = env("DATABASE_URL") // Uses an environment variable for the connection URL.
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
+  hash      String
+  firstName String?
+  lastName  String?
+  role      Role     @default(EMPLOYEE)
+
+  expenses Expense[] // Links the user to multiple expense records.
+
+  @@map("users") // Maps this model to the "users" table.
+}
+
+model Expense {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  amount      Float
+  description String?
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade) 
+                       // Relates each expense to a specific user, with cascading deletes.
+
+  @@map("expenses") // Maps this model to the "expenses" table.
+}
+
+enum Role {
+  CEO        // Executive-level role.
+  EMPLOYEE   // Default role for general users.
+}
