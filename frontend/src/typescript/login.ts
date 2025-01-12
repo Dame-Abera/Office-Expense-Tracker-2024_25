@@ -28,11 +28,11 @@ document.getElementById('login-form')?.addEventListener('submit', async (event: 
   
       // Redirect to dashboard or another page
       if (data.role === 'CEO') {
-        window.location.href ="/frontend/src/admin.html";
+        window.location.href ="admin.html";
         console.log("Redirecting to:", window.location.href);
   
       } else if (data.role === 'EMPLOYEE') {
-        window.location.href ="/frontend/src/employe.html";
+        window.location.href ="employe.html";
         console.log("Redirecting to:", window.location.href);
       }
   
