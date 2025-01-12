@@ -1,10 +1,11 @@
+
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client-js" // Generates the Prisma Client for database operations.
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql"       // Connects to a PostgreSQL database.
+  url      = env("DATABASE_URL") // Uses an environment variable for the connection URL.
 }
 
 model User {
@@ -17,11 +18,10 @@ model User {
   lastName  String?
   role      Role     @default(EMPLOYEE)
 
-  expenses Expense[] 
+  expenses Expense[] // Links the user to multiple expense records.
 
-  @@map("users")
+  @@map("users") // Maps this model to the "users" table.
 }
-
 
 model Expense {
   id          Int      @id @default(autoincrement())
@@ -31,12 +31,13 @@ model Expense {
   amount      Float
   description String?
   userId      Int
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade) 
+                       // Relates each expense to a specific user, with cascading deletes.
 
-  @@map("expenses")
+  @@map("expenses") // Maps this model to the "expenses" table.
 }
 
 enum Role {
-  CEO
-  EMPLOYEE
+  CEO        // Executive-level role.
+  EMPLOYEE   // Default role for general users.
 }
