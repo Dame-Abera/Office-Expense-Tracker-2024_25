@@ -1,7 +1,7 @@
 const token = localStorage.getItem('access_token');
 
 if (!token) {
-  window.location.href = './login.html';
+  window.location.href = "login.html";
 }
 
 // Type definition for Expense
@@ -144,7 +144,7 @@ const handleDeleteExpense = async (e: Event): Promise<void> => {
 // Logout functionality
 document.getElementById('logout-btn')?.addEventListener('click', () => {
   localStorage.removeItem('access_token');
-  window.location.href = './login.html';
+  window.location.href = 'login.html';
 });
 
 // Load expenses on page load

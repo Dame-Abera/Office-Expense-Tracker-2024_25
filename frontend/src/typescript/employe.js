@@ -38,7 +38,7 @@ var _a, _b, _c;
 var _this = this;
 var token = localStorage.getItem('access_token');
 if (!token) {
-    window.location.href = './login.html';
+    window.location.href = "login.html";
 }
 // Load user's expenses
 var loadExpenses = function () { return __awaiter(_this, void 0, void 0, function () {
@@ -203,7 +203,7 @@ var handleDeleteExpense = function (e) { return __awaiter(_this, void 0, void 0,
 // Logout functionality
 (_c = document.getElementById('logout-btn')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', function () {
     localStorage.removeItem('access_token');
-    window.location.href = './login.html';
+    window.location.href = 'login.html';
 });
 // Load expenses on page load
 loadExpenses();
